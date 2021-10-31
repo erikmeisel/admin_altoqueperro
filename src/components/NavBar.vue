@@ -39,6 +39,13 @@
               >
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/users">
+              <a class="nav-link text-white mr-1" href="#"
+                >Usuarios</a
+              >
+            </router-link>
+          </li>          
         </ul>
       </div>
     </nav>
