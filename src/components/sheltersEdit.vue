@@ -19,10 +19,14 @@
           v-model="formData.data.hoster"
           :rules="[rules.required]"
         />                      
-        <v-text-field dense label="Imagen" 
-          v-model="formData.data.imageUrl"
-          :rules="[rules.required]"
-        />                  
+      <v-img
+          :src="imgPreview"
+          max-height="150"
+          max-width="250"
+      ></v-img>
+      <v-file-input  dense label="Imagen"
+        @change="previewImage($event)" accept="image/*"        
+      ></v-file-input>        
         <v-text-field dense label="Dirección" 
           v-model="formData.data.address"
           :rules="[rules.required]"
@@ -50,11 +54,13 @@
 <script lang="js">
   import * as fb from '../firebase'
   import geocode from '../geocode'
+  import toBase64 from '../base64'
   export default  {
     name: 'src-components-agregar',
     props: [],
     mounted () {
       if(this.$route.params.data) this.formData = this.$route.params.data
+      this.imgPreview = this.formData.data.imageUrl      
     },
     data () {
       return {
@@ -66,6 +72,8 @@
             return pattern.test(value) || 'Invalid e-mail.'
           },
         },
+        imagen:null,
+        imgPreview:null,
         formData : {
           id:null,
           data:{
@@ -88,8 +96,22 @@
       }
     },
     methods: {
+      async previewImage(event) {
+        this.imgPreview = await toBase64(event)
+        this.imagen = event
+      },
+      guardarImagen(coordinates) {
+        if (this.imagen) {
+          fb.uploadFile(this.imagen).then((ret)=>{
+            this.formData.data.imageUrl=ret
+            this.guardar(coordinates)
+          })
+        } else {
+          this.guardar(coordinates)
+        }
+      },      
       async enviar() {
-        geocode(this,this.guardar)
+        geocode(this,this.guardarImagen)
       },
       guardar(coordinates) {
         this.formData.data.coordinates = coordinates

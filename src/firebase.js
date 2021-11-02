@@ -1,15 +1,8 @@
-import { initializeApp } from 'firebase/app';
+import  firebase  from 'firebase/compat';
 import { getFirestore, collection, getDocs, updateDoc, doc, addDoc,deleteDoc } from 'firebase/firestore/lite';
-let firebaseConfig = {
-  apiKey: "AIzaSyCJbQVG3LMv5eEDMZ4s6PpBbCKsiceDfs8",
-  authDomain: "1:577052019206:android:e4fb80fb9cea5c494f5187",
-  databaseURL: "https://altoqueperro-821dd-default-rtdb.firebaseio.com",
-  projectId: "altoqueperro-821dd",
-  storageBucket: "altoqueperro-821dd.appspot.com",
-  messagingSenderId: "1:577052019206:android:e4fb80fb9cea5c494f5187",
-  appId: "1:577052019206:android:e4fb80fb9cea5c494f5187",
-};
-let app = initializeApp(firebaseConfig);
+import env from '../config/.env'
+
+let app = firebase.initializeApp(env.firebaseConfig);
 let db = getFirestore(app);
 
 export async function get(col) {
@@ -30,5 +23,16 @@ export async function del(col,id) {
   const docRef = doc(db, col+'/'+id);
   return await deleteDoc(docRef);
 }    
+
+export async function uploadFile(file){
+  try {
+    let stoRef = await app.firebase.storage().ref('images/'+ file.name).put(file)
+    let downloadUrl = stoRef.ref.getDownloadURL()
+    return downloadUrl
+  } catch(ex) {
+    console.log(ex)
+    return null
+  }
+}
 
 export default  {app,db} 
