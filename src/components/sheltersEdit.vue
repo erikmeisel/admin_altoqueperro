@@ -1,85 +1,49 @@
 <template lang="html">
 
 <section class="src-components-agregar">
-    <form @submit.prevent="enviar()">
-        <label for="nombre">Nombre</label>
-        <input 
-          type="text" 
-          class="form-control"
+   <v-form
+    ref="form"
+    v-model="valid"
+  >
+        <v-text-field dense label="Nombre" 
           v-model="formData.data.name"
-          required
-        >      
-        <br>
-        <label for="nombre">Telefono</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />      
+        <v-text-field dense label="Telefono" 
           v-model="formData.data.phoneNumber"
-        >      
-        <br>
-        <label for="nombre">Cap. Max. </label>
-        <input 
-          type="text" 
-          class="form-control"
+        />      
+        <v-text-field dense label="Cap. Max. " 
           v-model="formData.data.capmax"
-        >              
-        <br>        
-        <label for="nombre">Anfitrión</label>
-        <input 
-          type="text" 
-          class="form-control"
+        />                      
+        <v-text-field dense label="Anfitrión" 
           v-model="formData.data.hoster"
-          required
-        >              
-        <br>        
-        <label for="nombre">URL Imagen</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />                      
+        <v-text-field dense label="Imagen" 
           v-model="formData.data.imageUrl"
-          required
-        >      
-        <br>            
-        <label for="nombre">Dirección</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />                  
+        <v-text-field dense label="Dirección" 
           v-model="formData.data.address"
-          required
-        >   
-        <br> 
-        <label for="nombre">Barrio / Localidad</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />    
+        <v-text-field dense label="Barrio / Localidad" 
           v-model="formData.data.localidad"
-          required
-        >   
-        <br> 
-        <label for="nombre">Provincia</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />    
+        <v-text-field dense label="Provincia" 
           v-model="formData.data.province"
-          required
-        >   
-        <br> 
-        <label for="nombre">Pais</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />    
+        <v-text-field dense label="Pais" 
           v-model="formData.data.country"
-          required
-        >   
-        <label for="nombre">Notas</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />   
+        <v-text-field dense label="Notas" 
           v-model="formData.data.notes"
-        >   
-        <br>         
-        <button class="btn btn-success my-3" type="submit">Guardar</button>
-      </form>
+        />            
+        <v-btn :disabled="!valid" color="warning" @click="enviar">Guardar</v-btn>
+      </v-form>
     </section>
 </template>
 
@@ -94,6 +58,14 @@
     },
     data () {
       return {
+        valid:false,
+        rules: {
+          required: value => !!value || 'Required.',
+          email: value => {
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return pattern.test(value) || 'Invalid e-mail.'
+          },
+        },
         formData : {
           id:null,
           data:{

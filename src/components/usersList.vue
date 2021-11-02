@@ -1,21 +1,21 @@
 <template lang="html">
 
   <section class="src-components-listar">
-    <table class="table">
-      <tr class="bg-success text-white">
+    <v-simple-table>
+      <thead>
           <th>ID</th>
           <th>Nombre</th>
           <th>e-mail</th>
           <th>Acciones</th>
-      </tr>
+      </thead><tbody>
       <tr class="bg-info text-white" v-for="(item,index) in data" :key="index">
           <td>{{ item.id }}</td>
           <td>{{ item.data.name }}</td>
           <td>{{ item.data.email }}</td>
-          <td><button class="btn btn-warning" type="button"  @click="editar(item)">Editar</button> 
-          <button class="btn btn-danger" type="button" @click="borrar(index,item)">Borrar</button></td>
-      </tr>
-    </table>
+          <td><v-btn small color="warning"  @click="editar(item)">Editar</v-btn> 
+          <v-btn small color="danger" @click="borrar(index,item)">Borrar</v-btn></td>
+      </tr></tbody>
+    </v-simple-table>    
   </section>
 </template>
 

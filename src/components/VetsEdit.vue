@@ -1,87 +1,54 @@
 <template lang="html">
 
 <section class="src-components-agregar">
-    <form @submit.prevent="enviar()">
-        <label for="nombre">Nombre</label>
-        <input 
-          type="text" 
-          class="form-control"
+  
+    <v-form
+    ref="form"
+    v-model="valid"
+  >
+        <v-text-field dense label="Nombre" 
           v-model="formData.data.name"
-          required
-        >      
-        <br>
-        <label for="nombre">Telefono</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>      
+        <v-text-field dense label="Telefono" 
           v-model="formData.data.phone"
-          required
-        >      
-        <br>        
-        <label for="nombre">URL Imagen</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>              
+        <v-text-field dense label="Imagen" 
           v-model="formData.data.imageUrl"
-          required
-        >      
-        <br>            
-        <label for="nombre">Horario de atención</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>      
+        
+                    
+        <v-text-field dense label="Horario de atención" 
           v-model="formData.data.businessHours"
-          required
-        >   
-        <br> 
-        <label for="nombre">Dirección</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>    
+        <v-text-field dense label="Dirección" 
           v-model="formData.data.address"
-          required
-        >   
-        <br> 
-        <label for="nombre">Barrio / Localidad</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>    
+        <v-text-field dense label="Barrio / Localidad" 
           v-model="formData.data.localidad"
-          required
-        >   
-        <br> 
-        <label for="nombre">Provincia</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>    
+        <v-text-field dense label="Provincia" 
           v-model="formData.data.province"
-          required
-        >   
-        <br> 
-        <label for="nombre">Pais</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>    
+        <v-text-field dense label="Pais" 
           v-model="formData.data.country"
-          required
-        >   
-        <br> 
-        <label for="nombre">Profesional</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        ></v-text-field>    
+        <v-text-field dense label="Profesional" 
           v-model="formData.data.profesional"
-        >   
-        <br> 
-        <label for="nombre">Notas</label>
-        <input 
-          type="text" 
-          class="form-control"
+        ></v-text-field>    
+        <v-text-field dense label="Notas" 
           v-model="formData.data.notes"
-        >   
-        <br>         
-        <button class="btn btn-success my-3" type="submit">Guardar</button>
-      </form>
+        ></v-text-field>            
+        <v-btn :disabled="!valid" color="warning"
+      @click="enviar">Guardar</v-btn>
+      </v-form>
     </section>
 </template>
 
@@ -96,6 +63,14 @@
     },
     data () {
       return {
+        valid:false,
+        rules: {
+          required: value => !!value || 'Required.',
+          email: value => {
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return pattern.test(value) || 'Invalid e-mail.'
+          },
+        },
         formData : {
           id:null,
           data:{

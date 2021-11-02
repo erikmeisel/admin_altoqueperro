@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, updateDoc, doc, addDoc,deleteDoc } from 'firebase/firestore/lite';
-
 let firebaseConfig = {
   apiKey: "AIzaSyCJbQVG3LMv5eEDMZ4s6PpBbCKsiceDfs8",
   authDomain: "1:577052019206:android:e4fb80fb9cea5c494f5187",

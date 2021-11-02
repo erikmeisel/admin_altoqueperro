@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import { router } from './router'
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import Geocoder from "@pderas/vue2-geocoder";
 import env from '../config/.env'
+import vuetify from './plugins/vuetify'
 Vue.config.productionTip = false
 
 Vue.use(Geocoder, {
@@ -16,5 +15,6 @@ Vue.use(Geocoder, {
 
 new Vue({
   router,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

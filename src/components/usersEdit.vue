@@ -1,37 +1,27 @@
 <template lang="html">
 
 <section class="src-components-agregar">
-    <form @submit.prevent="enviar()">
-        <label for="nombre">Nombre</label>
-        <input 
-          type="text" 
-          class="form-control"
+    <v-form
+    ref="form"
+    v-model="valid"
+  >
+        <v-text-field dense label="Nombre"
           v-model="formData.data.name"
-          required
-        >      
-        <br>
-        <label for="nombre">Telefono</label>
-        <input 
-          type="text" 
-          class="form-control"
+          :rules="[rules.required]"
+        />      
+        <v-text-field dense label="Telefono"
           v-model="formData.data.phone"
-        >      
-        <label for="nombre">Fecha Nacimiento</label>
-        <input 
-          type="text" 
-          class="form-control"
+        />      
+        <v-text-field dense label="Fecha Nacimiento"
           v-model="formData.data.birth"
-        >   
-        <br>         
-        <label for="nombre">E-Mail</label>
-        <input 
-          type="text" 
-          class="form-control"
+        />   
+        <v-text-field dense label="E-Mail"
           v-model="formData.data.email"
-        >   
-        <br>         
-        <button class="btn btn-success my-3" type="submit">Guardar</button>
-      </form>
+          :rules="[rules.required,rules.email]"
+        />   
+        <v-btn :disabled="!valid" color="warning"
+      @click="enviar">Guardar</v-btn>
+      </v-form>
     </section>
 </template>
 
@@ -45,6 +35,14 @@
     },
     data () {
       return {
+        valid:false,
+        rules: {
+          required: value => !!value || 'Required.',
+          email: value => {
+            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return pattern.test(value) || 'Invalid e-mail.'
+          },
+        },
         formData : {
           id:null,
           data:{

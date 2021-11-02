@@ -1,24 +1,24 @@
 <template lang="html">
 
   <section class="src-components-listar">
-    <button class="btn btn-success my-3" type="button" @click="nuevo()">Nuevo</button>
-    <table class="table">
-      <tr class="bg-success text-white">
+    <v-btn small color="success" @click="nuevo">Nuevo</v-btn> 
+    <v-simple-table>
+      <thead>
           <th>ID</th>
           <th>Nombre</th>
           <th>Telefono</th>
           <th>Localidad</th>
           <th>Acciones</th>
-      </tr>
-      <tr class="bg-info text-white" v-for="(vet,index) in vets" :key="index">
-          <td>{{ vet.id }}</td>
-          <td>{{ vet.data.name }}</td>
-          <td>{{ vet.data.phone }}</td>
-          <td>{{ vet.data.localidad }}</td>
-          <td><button class="btn btn-warning" type="button"  @click="editar(vet)">Editar</button> 
-          <button class="btn btn-danger" type="button" @click="borrar(index,vet)">Borrar</button></td>
-      </tr>
-    </table>
+      </thead><tbody>
+      <tr class="bg-info text-white" v-for="(item,index) in vets" :key="index">
+          <td>{{ item.id }}</td>
+          <td>{{ item.data.name }}</td>
+          <td>{{ item.data.phone }}</td>
+          <td>{{ item.data.localidad }}</td>
+          <td><v-btn small color="warning"  @click="editar(item)">Editar</v-btn> 
+          <v-btn small color="danger" @click="borrar(index,item)">Borrar</v-btn></td>
+      </tr></tbody>
+    </v-simple-table>
   </section>
 </template>
 
@@ -35,7 +35,7 @@
     },
     data () {
       return {
-        vets:null
+        vets:null,
       }
     },
     methods: {
