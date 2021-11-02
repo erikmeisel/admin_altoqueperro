@@ -29,6 +29,7 @@
           type="text" 
           class="form-control"
           v-model="formData.data.hoster"
+          required
         >              
         <br>        
         <label for="nombre">URL Imagen</label>
@@ -36,6 +37,7 @@
           type="text" 
           class="form-control"
           v-model="formData.data.imageUrl"
+          required
         >      
         <br>            
         <label for="nombre">Dirección</label>
@@ -43,20 +45,7 @@
           type="text" 
           class="form-control"
           v-model="formData.data.address"
-        >   
-        <br> 
-        <label for="nombre">Latitud</label>
-        <input 
-          type="text" 
-          class="form-control"
-          v-model="formData.data.coordinates.latitude"
-        >   
-        <br> 
-        <label for="nombre">Longitud</label>
-        <input 
-          type="text" 
-          class="form-control"
-          v-model="formData.data.coordinates.longitude"
+          required
         >   
         <br> 
         <label for="nombre">Barrio / Localidad</label>
@@ -64,8 +53,24 @@
           type="text" 
           class="form-control"
           v-model="formData.data.localidad"
+          required
         >   
         <br> 
+        <label for="nombre">Provincia</label>
+        <input 
+          type="text" 
+          class="form-control"
+          v-model="formData.data.province"
+          required
+        >   
+        <br> 
+        <label for="nombre">Pais</label>
+        <input 
+          type="text" 
+          class="form-control"
+          v-model="formData.data.country"
+          required
+        >   
         <label for="nombre">Notas</label>
         <input 
           type="text" 
@@ -80,6 +85,7 @@
 
 <script lang="js">
   import * as fb from '../firebase'
+  import geocode from '../geocode'
   export default  {
     name: 'src-components-agregar',
     props: [],
@@ -102,13 +108,19 @@
             localidad: null,
             notes:null,
             capmax:null,
-            hoster:null
+            hoster:null,
+            province:"Buenos Aires",
+            country:"Argentina",
           }
         }
       }
     },
     methods: {
       async enviar() {
+        geocode(this,this.guardar)
+      },
+      guardar(coordinates) {
+        this.formData.data.coordinates = coordinates
         if (this.formData.id) {
           fb.update('shelters',this.formData.id,this.formData.data).then((ret) => {
             console.log(ret)
@@ -119,7 +131,7 @@
             console.log(ret)
             this.$router.push("/shelters")
           }) 
-        }
+        }        
       }
     },
     computed: {

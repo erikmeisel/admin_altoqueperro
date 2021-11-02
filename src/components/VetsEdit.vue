@@ -23,6 +23,7 @@
           type="text" 
           class="form-control"
           v-model="formData.data.imageUrl"
+          required
         >      
         <br>            
         <label for="nombre">Horario de atención</label>
@@ -30,6 +31,7 @@
           type="text" 
           class="form-control"
           v-model="formData.data.businessHours"
+          required
         >   
         <br> 
         <label for="nombre">Dirección</label>
@@ -37,20 +39,7 @@
           type="text" 
           class="form-control"
           v-model="formData.data.address"
-        >   
-        <br> 
-        <label for="nombre">Latitud</label>
-        <input 
-          type="text" 
-          class="form-control"
-          v-model="formData.data.coordinates.latitude"
-        >   
-        <br> 
-        <label for="nombre">Longitud</label>
-        <input 
-          type="text" 
-          class="form-control"
-          v-model="formData.data.coordinates.longitude"
+          required
         >   
         <br> 
         <label for="nombre">Barrio / Localidad</label>
@@ -58,6 +47,23 @@
           type="text" 
           class="form-control"
           v-model="formData.data.localidad"
+          required
+        >   
+        <br> 
+        <label for="nombre">Provincia</label>
+        <input 
+          type="text" 
+          class="form-control"
+          v-model="formData.data.province"
+          required
+        >   
+        <br> 
+        <label for="nombre">Pais</label>
+        <input 
+          type="text" 
+          class="form-control"
+          v-model="formData.data.country"
+          required
         >   
         <br> 
         <label for="nombre">Profesional</label>
@@ -81,6 +87,7 @@
 
 <script lang="js">
   import * as fb from '../firebase'
+  import geocode from '../geocode'
   export default  {
     name: 'src-components-agregar',
     props: [],
@@ -103,13 +110,19 @@
             address: null,
             localidad: null,
             notes:null,
-            profesional:null
+            profesional:null,
+            province:"Buenos Aires",
+            country:"Argentina",
           }
         }
       }
     },
     methods: {
       async enviar() {
+        geocode(this,this.guardar)
+      },
+      guardar(coordinates) {
+        this.formData.data.coordinates = coordinates
         if (this.formData.id) {
           fb.update('vets',this.formData.id,this.formData.data).then((ret) => {
             console.log(ret)
@@ -121,14 +134,11 @@
             this.$router.push("/vets")
           }) 
         }
-      }
+      },
     },
     computed: {
-
     }
 }
-
-
 </script>
 
 <style scoped lang="css">
