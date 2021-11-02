@@ -1,3 +1,4 @@
+require('dotenv').config()
 import Vue from 'vue'
 import App from './App.vue'
 import { router } from './router'
@@ -11,7 +12,7 @@ Vue.use(Geocoder, {
     defaultCountryCode: 'AR', // e.g. 'CA'
     defaultLanguage:    'es', // e.g. 'en'
     defaultMode:        'address', // or 'lat-lng'
-    googleMapsApiKey:   'AIzaSyBG_locAo64-vGvc_BU6Pj6U1HaDqEbKuM'
+    googleMapsApiKey:   process.env.API_KEY
 });
 
 new Vue({
