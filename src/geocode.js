@@ -1,8 +1,7 @@
 export default function geocode(vue,next) {
     let dat = vue.formData.data
     var addressObj = {
-        address_line_1: dat.address ,
-        city:           dat.localidad,
+        address_line_1: dat.address,
         state:          dat.province,               
         country:        dat.country
     }
