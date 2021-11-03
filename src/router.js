@@ -14,7 +14,7 @@ import config from './components/Configuracion.vue'
 Vue.use(VueRouter)
 
 export const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes : [
       { path: '/', name:'Login', component: Login },
       { path: '/vetsedit', name: 'vetsedit', component: VetsEdit , meta: {requiresAuth: true}},

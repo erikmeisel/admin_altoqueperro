@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import { router } from './router'
 import Geocoder from "@pderas/vue2-geocoder";
-import env from '../config/.env'
+import env from '../config/config.env'
 import vuetify from './plugins/vuetify'
 import Vuex from 'vuex'
 

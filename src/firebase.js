@@ -1,6 +1,6 @@
 import  firebase  from 'firebase/compat';
 import { getFirestore, collection, getDocs, updateDoc, doc, addDoc,deleteDoc } from 'firebase/firestore/lite';
-import env from '../config/.env'
+import env from '../config/config.env'
 
 let app = firebase.initializeApp(env.firebaseConfig);
 let db = getFirestore(app);
