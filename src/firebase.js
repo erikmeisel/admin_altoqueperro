@@ -11,6 +11,10 @@ export async function get(col) {
   const dataList = dataSnapshot.docs.map(doc => { return {id:doc.id,data:doc.data()}});
   return dataList;
 }    
+export async function getItem(col,id) {
+  const docRef = doc(db, col+'/'+id);
+  return docRef;
+}   
 export async function update(col,id,value) {
   const docRef = doc(db, col+'/'+id);
   return await updateDoc(docRef, value);
