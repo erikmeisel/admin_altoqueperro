@@ -55,13 +55,13 @@
     data () {
       return {
         config:{
-          coat:14,
-          eyecolor:14,
-          sex:14,
-          size:14,
-          type:16,
-          coatSize:14,
-          color:14
+          coat:0,
+          eyecolor:0,
+          sex:0,
+          size:0,
+          type:0,
+          coatSize:0,
+          color:0
         }
       }
     },

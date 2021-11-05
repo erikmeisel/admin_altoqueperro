@@ -20,6 +20,7 @@
             </v-list>
           </v-menu>          
           <v-tab to="/config">Configurar ponderacion estadística</v-tab>
+          <v-tab to="/report">Reportes</v-tab>
         </v-tabs>
   </section>
 </template>

@@ -10,6 +10,7 @@ import Login from './components/Login.vue'
 import petEdit from './components/petEdit.vue'
 import petList from './components/petList.vue'
 import config from './components/Configuracion.vue'
+import report from './components/Reportes.vue'
 
 Vue.use(VueRouter)
 
@@ -26,5 +27,6 @@ export const router = new VueRouter({
       { path: '/petedit',  name: 'petedit', component: petEdit , meta: {requiresAuth: true}},
       { path: '/pet', component: petList , meta: {requiresAuth: true}},
       { path: '/config', component: config , meta: {requiresAuth: true}},
+      { path: '/report', component: report , meta: {requiresAuth: true}},
   ]
 })
