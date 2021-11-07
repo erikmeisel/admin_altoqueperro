@@ -1,7 +1,7 @@
 <template lang="html">
 
   <section class="src-components-listar">
-<v-btn small color="success" @click="nuevo">Nuevo</v-btn> 
+<v-btn small color="success" id="btnAgregar"  @click="nuevo">Agregar Hogar de Transito</v-btn> 
     <v-simple-table>
       <thead>
           <th>ID</th>
@@ -15,8 +15,8 @@
           <td>{{ item.data.name }}</td>
           <td>{{ item.data.phone }}</td>
           <td>{{ item.data.localidad }}</td>
-          <td><v-btn small color="warning"  @click="editar(item)">Editar</v-btn> 
-          <v-btn small color="danger" @click="borrar(index,item)">Borrar</v-btn></td>
+          <td><v-btn small color="yellow"  @click="editar(item)">Editar</v-btn> 
+          <v-btn small color="red" @click="borrar(index,item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
   </section>
@@ -66,5 +66,19 @@
 <style scoped lang="css">
   .src-components-listar {
     margin: 1em
+  }
+
+  .v-btn{
+    margin-right: 10px;
+    margin-left: 20px;
+  }
+
+  #btnAgregar{
+    margin: 25px;
+    padding: 20px;
+  }
+
+  thead{
+    background: #D36D5E;
   }
 </style>

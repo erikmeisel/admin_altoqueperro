@@ -1,6 +1,6 @@
 <template lang="html">
   <section class="src-components-nav-bar">
-        <v-tabs center-active align-with-title v-if="$store.state.authenticated">
+        <v-tabs center-active align-with-title v-if="$store.state.authenticated" >
           <v-menu
             bottom
             left
@@ -53,4 +53,11 @@
   .src-components-nav-bar {
 
   }
+
+
+  
+
+  
+
+
 </style>

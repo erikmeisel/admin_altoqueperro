@@ -98,4 +98,14 @@
   .src-components-configuracion {
 
   }
+  
+  h1{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align-last: center;
+  }
+
+  td{
+    font-size: 20px;
+  }
 </style>
