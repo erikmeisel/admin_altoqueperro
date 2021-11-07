@@ -1,7 +1,7 @@
 <template lang="html">
 
-  <section class="src-components-listar">
-    <v-simple-table>
+  <section class="src-components-listar" >
+    <v-simple-table align="center">
       <thead>
           <th>ID</th>
           <th>Nombre</th>

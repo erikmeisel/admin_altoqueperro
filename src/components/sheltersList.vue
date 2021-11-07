@@ -1,9 +1,10 @@
 <template lang="html">
 
   <section class="src-components-listar">
-<v-btn small color="success" id="btnAgregar"  @click="nuevo">Agregar Hogar de Transito</v-btn> 
+<v-btn small color="success" id="btnAgregar"  
+  @click="nuevo">Agregar Hogar de Transito</v-btn> 
     <v-simple-table>
-      <thead>
+      <thead >
           <th>ID</th>
           <th>Nombre</th>
           <th>Telefono</th>

@@ -1,8 +1,8 @@
 <template lang="html">
 
 <section class="src-components-agregar">
-   <v-form
-    ref="form"
+   <v-form class="col-sm-10 col-md-6 col-lg-6"
+    ref="form" align="center"
     v-model="valid"
   >
         <v-text-field dense label="Nombre" 
@@ -140,4 +140,15 @@
   .src-components-agregar {
     margin: 2em;
   }
+
+  .v-form{
+  padding-top: 100px;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  
+  background: #d36d5ebb ;
+  }  
 </style>

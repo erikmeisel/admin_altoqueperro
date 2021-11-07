@@ -1,9 +1,9 @@
 <template lang="html">
 
-  <section class="src-components-listar">
+  <section class="src-components-listar" align="start">
     <h3>Lista de Mascotas Perdidas</h3>
-    <v-simple-table>
-      <thead>
+    <v-simple-table >
+      <thead >
           <th>ID</th>
           <th>Nombre</th>
           <th>Tipo</th>
@@ -103,7 +103,6 @@
 
   thead{
     background: #D36D5E;
-    
     text-align-last: left;
   }
 </style>

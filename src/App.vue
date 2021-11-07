@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background: #F0CD71">
+  <v-app style="background: #F0CD71" >
     <Banner/>
     <NavBar />
     <v-main>
@@ -21,5 +21,7 @@ export default {
   }
 }
 </script>
+
+
 
 

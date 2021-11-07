@@ -1,11 +1,11 @@
 <template lang="html">
-  <section class="src-components-nav-bar">
+  <section class="src-components-nav-bar" >
         <v-tabs center-active align-with-title v-if="$store.state.authenticated" >
-          <v-menu
+          <v-menu 
             bottom
             left
           >
-            <template v-slot:activator="{ on, attrs }">
+            <template  v-slot:activator="{ on, attrs }">
 <v-tab  v-bind="attrs" v-on="on">Editar datos</v-tab>
             </template>
             <v-list>
@@ -52,6 +52,10 @@
 <style scoped lang="css">
   .src-components-nav-bar {
 
+  }
+
+  section{
+    align-self:center
   }
 
 
