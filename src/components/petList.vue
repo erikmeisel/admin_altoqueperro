@@ -1,9 +1,9 @@
 <template lang="html">
 
-  <section class="src-components-listar">
-    <h3>Mascotas Perdidas</h3>
-    <v-simple-table>
-      <thead>
+  <section class="src-components-listar" align="start">
+    <h3>Lista de Mascotas Perdidas</h3>
+    <v-simple-table >
+      <thead >
           <th>ID</th>
           <th>Nombre</th>
           <th>Tipo</th>
@@ -13,11 +13,11 @@
           <td>{{ item.id }}</td>
           <td>{{ item.data.pet.name }}</td>
           <td>{{ item.data.pet.type }}</td>
-          <td><v-btn small color="danger"  @click="borrar(item)">Borrar</v-btn></td>
+          <td><v-btn small color="red" @click="borrar(item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
-
-    <h3>Mascotas Encontradas</h3>
+    <br>
+    <h3>Lista de Mascotas Encontradas</h3>
     <v-simple-table>
       <thead>
           <th>ID</th>
@@ -29,7 +29,7 @@
           <td>{{ item.id }}</td>
           <td>{{ item.data.pet.coat }}</td>
           <td>{{ item.data.pet.type }}</td>
-          <td><v-btn small color="danger"  @click="borrar2(item)">Borrar</v-btn></td>
+          <td><v-btn small color="red" @click="borrar2(item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
   </section>
@@ -91,5 +91,18 @@
 <style scoped lang="css">
   .src-components-listar {
     margin: 1em
+  }
+  h3{
+    margin-top: 20px;
+    margin-left: 15px;
+  }
+
+  .td{
+    text-align-last: center;
+  }
+
+  thead{
+    background: #D36D5E;
+    text-align-last: left;
   }
 </style>

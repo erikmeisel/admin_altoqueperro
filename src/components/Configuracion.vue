@@ -1,8 +1,8 @@
 <template lang="html">
 
-  <section class="src-components-configuracion">
+  <section class="src-components-configuracion"  align="center">
     <h1>Configración de ponderación de valores</h1>
-    <v-simple-table>
+    <v-simple-table >
       <tbody>
       <tr class="bg-info text-white">
           <td>Tipo de Mascota</td>
@@ -34,8 +34,9 @@
       </tr>
 
       </tbody>
+         <v-btn id="btn_guardar" color="warning" :disabled="this.suma!=100" @click="guardar">Guardar</v-btn>
     </v-simple-table>  
-    <v-btn  color="warning" :disabled="this.suma!=100" @click="guardar">Guardar</v-btn>
+ 
   
   </section>
 
@@ -98,4 +99,32 @@
   .src-components-configuracion {
 
   }
+  
+  h1{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align-last: center;
+  }
+
+  td{
+    font-size: 20px;
+  }
+
+  section{
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+  
+  .v-btn{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #btn_guardar{
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+
+
 </style>

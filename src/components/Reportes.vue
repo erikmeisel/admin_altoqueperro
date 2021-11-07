@@ -1,11 +1,14 @@
 <template lang="html">
 
   <section class="src-reportes">
-    <h1>Reportes</h1>
+    <h1 align="center">Reportes</h1>
+    <div align="center">
     <v-btn  color="warning" @click="sem()">1 Semana</v-btn>
     <v-btn  color="warning" @click="mes()">1 Mes</v-btn>
     <v-btn  color="warning" @click="ano()">1 Año</v-btn>
     <v-btn  color="warning" @click="todos()">Todos</v-btn>
+    </div>
+
     <v-simple-table>
       <tbody>
       <tr class="bg-info text-white">
@@ -190,4 +193,17 @@
   .src-reportes {
 
   }
+
+  .v-btn{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  section{
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+
 </style>
