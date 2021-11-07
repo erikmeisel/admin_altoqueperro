@@ -64,6 +64,7 @@
   import * as fb from '../firebase'
   import geocode from '../geocode'
   import toBase64 from '../base64'
+  import moment from 'moment'
   export default  {
     name: 'src-components-agregar',
     props: [],
@@ -100,6 +101,7 @@
             profesional:null,
             province:"Buenos Aires",
             country:"Argentina",
+            createdDate:null
           }
         }
       }
@@ -122,8 +124,16 @@
           this.guardar(coordinates)
         }
       },
+      getFBNow() {
+        let date = moment()
+        return {
+          seconds: date.unix(),
+          nanoseconds: date.valueOf()
+        }
+      },
       guardar(coordinates) {
         this.formData.data.coordinates = coordinates
+        if (!this.formData.data.createdDate) this.formData.data.createdDate = this.getFBNow()
         if (this.formData.id) {
           fb.update('vets',this.formData.id,this.formData.data).then((ret) => {
             console.log(ret)
