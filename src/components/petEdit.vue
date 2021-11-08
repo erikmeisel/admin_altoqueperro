@@ -5,66 +5,60 @@
     ref="form" align="center"
     v-model="valid"
   >
+        <v-text-field dense label="requestConsumer" 
+          v-model="formData.data.requestConsumer"
+        />      
+        <v-text-field dense label="requestCreator" 
+          v-model="formData.data.requestCreator"
+        />      
+        Fecha Resuelto: {{formData.data.resolvedDate}}
+        <v-text-field dense label="state" 
+          v-model="formData.data.state"
+        />                      
+
+        <v-text-field dense label="Color de Pelo" 
+          v-model="formData.data.pet.coat"
+        />    
+        <v-text-field dense label="Largo Del Pelo" 
+          v-model="formData.data.pet.coatSize"
+        />    
+        <v-text-field dense label="Color de ojos" 
+          v-model="formData.data.pet.eyeColor"
+        />    
         <v-text-field dense label="Nombre" 
-          v-model="formData.data.name"
-          :rules="[rules.required]"
-        />      
-        <v-text-field dense label="Telefono" 
-          v-model="formData.data.phoneNumber"
-        />      
-        <v-text-field dense label="Cap. Max. " 
-          v-model="formData.data.capmax"
-        />                      
-        <v-text-field dense label="Anfitrión" 
-          v-model="formData.data.hoster"
-          :rules="[rules.required]"
-        />                      
-      <v-img
-          :src="imgPreview"
-          max-height="150"
-          max-width="250"
-      ></v-img>
-      <v-file-input  dense label="Imagen"
-        @change="previewImage($event)" accept="image/*"        
-      ></v-file-input>        
-        <v-text-field dense label="Dirección" 
-          v-model="formData.data.address"
-          :rules="[rules.required]"
+          v-model="formData.data.pet.name"
         />    
-        <v-text-field dense label="Barrio / Localidad" 
-          v-model="formData.data.localidad"
-          :rules="[rules.required]"
+        <v-text-field dense label="Sexo" 
+          v-model="formData.data.pet.sex"
         />    
-        <v-text-field dense label="Provincia" 
-          v-model="formData.data.province"
-          :rules="[rules.required]"
+        <v-text-field dense label="Tamaño" 
+          v-model="formData.data.pet.size"
         />    
-        <v-text-field dense label="Pais" 
-          v-model="formData.data.country"
-          :rules="[rules.required]"
-        />   
-        <v-text-field dense label="Notas" 
-          v-model="formData.data.notes"
-        />            
-        <v-btn :disabled="!valid" color="warning" @click="enviar">Guardar</v-btn>
+        <v-text-field dense label="Tipo" 
+          v-model="formData.data.pet.type"
+        />    
+        <v-btn :disabled="!valid" color="warning" @click="guardar">Guardar</v-btn>
       </v-form>
     </section>
 </template>
 
 <script lang="js">
   import * as fb from '../firebase'
-  import geocode from '../geocode'
   import toBase64 from '../base64'
   export default  {
     name: 'src-components-agregar',
     props: [],
     mounted () {
-      if(this.$route.params.data) this.formData = this.$route.params.data
-      this.imgPreview = this.formData.data.imageUrl      
+      if(this.$route.params.data) {
+        this.formData = this.$route.params.data
+        this.collection = this.$route.params.collection
+      }
+      //this.imgPreview = this.formData.data.imageUrl      
     },
     data () {
       return {
         valid:false,
+        collection:null,
         rules: {
           required: value => !!value || 'Required.',
           email: value => {
@@ -77,20 +71,23 @@
         formData : {
           id:null,
           data:{
-            coordinates: {
-              latitude:0,
-              longitude:0
+            coordinates:{
+              latitude:null,
+              longitude:null,
             },
-            imageUrl: null,
-            name: null,
-            phoneNumber: null,
-            address: null,
-            localidad: null,
-            notes:null,
-            capmax:null,
-            hoster:null,
-            province:"Buenos Aires",
-            country:"Argentina",
+            creationDate:null,
+            pet:{
+              coat:null,
+              eyeColor:null,
+              name:null,
+              sex:null,
+              size:null,
+              type:null,
+            },
+            requestConsumer:null,
+            requestCreator:null,
+            resolvedDate:null,
+            state:0,
           }
         }
       }
@@ -100,30 +97,16 @@
         this.imgPreview = await toBase64(event)
         this.imagen = event
       },
-      guardarImagen(coordinates) {
-        if (this.imagen) {
-          fb.uploadFile(this.imagen).then((ret)=>{
-            this.formData.data.imageUrl=ret
-            this.guardar(coordinates)
-          })
-        } else {
-          this.guardar(coordinates)
-        }
-      },      
-      async enviar() {
-        geocode(this,this.guardarImagen)
-      },
-      guardar(coordinates) {
-        this.formData.data.coordinates = coordinates
+      guardar() {
         if (this.formData.id) {
-          fb.update('shelters',this.formData.id,this.formData.data).then((ret) => {
+          fb.update(this.collection,this.formData.id,this.formData.data).then((ret) => {
             console.log(ret)
-            this.$router.push("/shelters")
+            this.$router.push("/pet")
           }) 
         } else {
-          fb.create('shelters',this.formData.data).then((ret) => {
+          fb.create(this.collection,this.formData.data).then((ret) => {
             console.log(ret)
-            this.$router.push("/shelters")
+            this.$router.push("/pet")
           }) 
         }        
       }

@@ -13,7 +13,8 @@
           <td>{{ item.id }}</td>
           <td>{{ item.data.pet.name }}</td>
           <td>{{ item.data.pet.type }}</td>
-          <td><v-btn small color="red" @click="borrar(item)">Borrar</v-btn></td>
+          <td><v-btn small color="yellow" margin-left="20ps"  @click="editar2(item)">Editar</v-btn>
+          <v-btn small color="red" @click="borrar(item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
     <br>
@@ -29,7 +30,8 @@
           <td>{{ item.id }}</td>
           <td>{{ item.data.pet.coat }}</td>
           <td>{{ item.data.pet.type }}</td>
-          <td><v-btn small color="red" @click="borrar2(item)">Borrar</v-btn></td>
+          <td><v-btn small color="yellow" margin-left="20ps"  @click="editar(item)">Editar</v-btn>
+          <v-btn small color="red" @click="borrar2(item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
   </section>
@@ -77,7 +79,10 @@
         }
       },
       editar(item) {
-        this.$router.push({name: 'petedit', params: { data: item }})
+        this.$router.push({name: 'petedit', params: { data: item,collection:"foundPetRequests" }})
+      },
+      editar2(item) {
+        this.$router.push({name: 'petedit', params: { data: item,collection:"lostPetRequests" }})
       }
     },
     computed: {
