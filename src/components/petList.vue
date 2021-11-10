@@ -13,7 +13,7 @@
           <td>{{ item.id }}</td>
           <td>{{ item.data.pet.name }}</td>
           <td>{{ item.data.pet.type }}</td>
-          <td><v-btn small color="yellow" margin-left="20ps"  @click="editar2(item)">Editar</v-btn>
+          <td>
           <v-btn small color="red" @click="borrar(item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
@@ -30,7 +30,7 @@
           <td>{{ item.id }}</td>
           <td>{{ item.data.pet.coat }}</td>
           <td>{{ item.data.pet.type }}</td>
-          <td><v-btn small color="yellow" margin-left="20ps"  @click="editar(item)">Editar</v-btn>
+          <td>
           <v-btn small color="red" @click="borrar2(item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
