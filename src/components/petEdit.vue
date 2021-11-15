@@ -1,44 +1,47 @@
 <template lang="html">
 
 <section class="src-components-agregar">
-   <v-form class="col-sm-10 col-md-6 col-lg-6"
-    ref="form" align="center"
-    v-model="valid"
-  >
-        <v-text-field dense label="requestConsumer" 
-          v-model="formData.data.requestConsumer"
-        />      
-        <v-text-field dense label="requestCreator" 
-          v-model="formData.data.requestCreator"
-        />      
-        Fecha Resuelto: {{formData.data.resolvedDate}}
-        <v-text-field dense label="state" 
-          v-model="formData.data.state"
-        />                      
+  
+<v-container class="grey lighten-5">
+    <v-row no-gutters>
+      <v-col>
+          <v-form 
+            ref="form" align="center"
+            v-model="valid"
+          >
+                <p>Request Consumer: {{formData.data.requestConsumer}}</p>
+                <p>Request Creator: {{formData.data.requestCreator}}</p>
+                <p>Fecha Resuelto: {{formData.data.resolvedDate}} </p>
+                <v-text-field dense label="Nombre" 
+                  v-model="formData.data.pet.name"
+                />    
+                <p>Sexo : {{formData.data.pet.sex}} </p>
+                <p>Tamaño : {{formData.data.pet.size}} </p>
+                <p>Tipo : {{formData.data.pet.type}} </p>
 
-        <v-text-field dense label="Color de Pelo" 
-          v-model="formData.data.pet.coat"
-        />    
-        <v-text-field dense label="Largo Del Pelo" 
-          v-model="formData.data.pet.coatSize"
-        />    
-        <v-text-field dense label="Color de ojos" 
-          v-model="formData.data.pet.eyeColor"
-        />    
-        <v-text-field dense label="Nombre" 
-          v-model="formData.data.pet.name"
-        />    
-        <v-text-field dense label="Sexo" 
-          v-model="formData.data.pet.sex"
-        />    
-        <v-text-field dense label="Tamaño" 
-          v-model="formData.data.pet.size"
-        />    
-        <v-text-field dense label="Tipo" 
-          v-model="formData.data.pet.type"
-        />    
-        <v-btn :disabled="!valid" color="warning" @click="guardar">Guardar</v-btn>
-      </v-form>
+                <v-btn :disabled="!valid" color="warning" @click="guardar()">Guardar</v-btn>
+              </v-form>
+      </v-col>
+      <v-col>
+        <GmapMap
+              :center='center'
+              :zoom='17'
+              style='width:100%;  height: 500px;'
+        >
+          <GmapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="center=m.position"
+            @drag="updateCoordinates"
+        />
+        </GmapMap>
+      </v-col>
+    </v-row>
+  </v-container>
+
     </section>
 </template>
 
@@ -52,11 +55,21 @@
       if(this.$route.params.data) {
         this.formData = this.$route.params.data
         this.collection = this.$route.params.collection
+        if (!this.formData.data.coordinates) {
+          this.formData.data.coordinates = {
+            latitude:-34.6099906,
+            longitude:-58.431331
+          }
+        }
+        this.markers = [{position:{ lat:this.formData.data.coordinates.latitude, lng: this.formData.data.coordinates.longitude }}]
+        this.center = {lat:this.formData.data.coordinates.latitude, lng: this.formData.data.coordinates.longitude}
       }
-      //this.imgPreview = this.formData.data.imageUrl      
     },
     data () {
       return {
+        center: { lat:-34.6099906, lng: -58.431331 },
+        currentPlace: null,
+        markers: [],
         valid:false,
         collection:null,
         rules: {
@@ -109,7 +122,18 @@
             this.$router.push("/pet")
           }) 
         }        
-      }
+      },
+      addMarker(lat, lng) {
+        const marker = {
+          lat: lat,
+          lng: lng,
+        };
+        this.markers.push({ position: marker });
+      },
+      updateCoordinates(location) {
+        this.formData.data.coordinates.latitude =  location.latLng.lat()
+        this.formData.data.coordinates.longitude =  location.latLng.lng()
+      },      
     },
     computed: {
 

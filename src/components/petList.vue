@@ -14,7 +14,8 @@
           <td>{{ item.data.pet.name }}</td>
           <td>{{ item.data.pet.type }}</td>
           <td>
-          <v-btn small color="red" @click="borrar(item)">Borrar</v-btn></td>
+          <v-btn small color="yellow" @click="editar2(item)">Editar</v-btn>
+          <v-btn small color="red" @click="borrar(index,item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
     <br>
@@ -31,7 +32,8 @@
           <td>{{ item.data.pet.coat }}</td>
           <td>{{ item.data.pet.type }}</td>
           <td>
-          <v-btn small color="red" @click="borrar2(item)">Borrar</v-btn></td>
+          <v-btn small color="yellow" @click="editar(item)">Editar</v-btn>
+          <v-btn small color="red" @click="borrar2(index,item)">Borrar</v-btn></td>
       </tr></tbody>
     </v-simple-table>
   </section>

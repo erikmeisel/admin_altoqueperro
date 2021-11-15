@@ -5,6 +5,7 @@ import Geocoder from "@pderas/vue2-geocoder";
 import env from '../config/config.env'
 import vuetify from './plugins/vuetify'
 import Vuex from 'vuex'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,12 @@ const store = new Vuex.Store({
     }
   }
 })
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: env.API_KEY,
+    libraries: 'places',
+  }
+});
 Vue.config.productionTip = false
 
 Vue.use(Geocoder, {
